@@ -15,10 +15,9 @@ function updateState(state: IState, newProps: IState) {
   return { ...state, ...newProps };
 }
 
-
-function updateView(state: IState, payload: IView){
-   const newView = {...state.view, ...payload }
-   const newState = {...state, view: newView}
+function updateTest(state: IState, payload: IView){
+   const newQuestion = {...state.questions, ...payload }
+   const newState = {...state, view: newQuestion}
    return newState;
 }
 
@@ -28,6 +27,8 @@ export default function reducer(state: IState = initialState, action: IAction) {
   switch (action.type) {
     case actions.UPDATE_STATE(payload).type:
       return updateState(state, payload);
+    case actions.UPDATE_TEST(payload).type:
+        return updateTest(state, payload);
     default:
       return state;
   }

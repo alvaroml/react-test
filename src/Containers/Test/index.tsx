@@ -1,26 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {  Container } from "@material-ui/core";
+import { Container, Fab } from "@material-ui/core";
 import actions from "Stores/Home/actions";
+import QuestionList from "./Components/QuestionList";
+import IQuestion from 'Models/questions';
 import './styles.css';
 
-function Test() {
+function Test({questions}: IProps) {
 
   return (
     <section className="testContainer">
-      <Container maxWidth="sm">      
+      <Fab className="testFab" variant="extended" onClick={()=>{console.log('The test fished')}}>
+        End Test
+      </Fab>
+      <Container maxWidth="sm">
+        <h1>Hello! {localStorage.getItem('userName')}</h1>
+      <QuestionList questions = {questions}/>      
       </Container>
     </section>
   );
 }
 
-//TODO: typo
+interface IProps {
+  questions: IQuestion[],
+  getTest: any
+}
+
 function mapStateProps(state: any) {
   return {
-    tasks: state.tasks,
-    users: state.users,
+    questions: state.questions,
     error: state.error,
-    showForm: state.view.showForm
   };
 }
 
@@ -32,8 +41,5 @@ function mapDispatchProps(dispatch: any) {
   };
 }
 
-interface IProps {
-  getTest: any,
-}
 
 export default connect(mapStateProps, mapDispatchProps)(Test);
